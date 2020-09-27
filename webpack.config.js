@@ -13,7 +13,7 @@ module.exports = env => {
         output: {
             filename: "[name].js",
             path: path.resolve(__dirname, 'dist'),
-            publicPath: "."
+            publicPath: ""
         },
         plugins: [
             new CleanWebpackPlugin(),
