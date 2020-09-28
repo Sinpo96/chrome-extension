@@ -7,8 +7,7 @@ module.exports = env => {
     return {
         mode: env.mode,
         entry: {
-            popup: path.resolve(__dirname, './src/popup/index.js'),
-            options: path.resolve(__dirname, './src/options/index.js'),
+            index: path.resolve(__dirname, './src/index.js')
         },
         output: {
             filename: "[name].js",
@@ -19,14 +18,8 @@ module.exports = env => {
             new CleanWebpackPlugin(),
             new HtmlWebpackPlugin({
                 filename: "popup.html",
-                template: path.resolve(__dirname, './src/popup/index.html'),
-                chunks: [ 'popup' ],
-                excludeChunks: [ 'background.js' ]
-            }),
-            new HtmlWebpackPlugin({
-                filename: "options.html",
-                template: path.resolve(__dirname, './src/options/index.html'),
-                chunks: [ 'options' ],
+                template: path.resolve(__dirname, './src/index.html'),
+                chunks: [ 'index' ],
                 excludeChunks: [ 'background.js' ]
             }),
             new CopyPlugin({
@@ -35,6 +28,15 @@ module.exports = env => {
                     { from: path.resolve(__dirname, './images/'), to: path.resolve(__dirname, 'dist/images/') },
                 ],
             })
-        ]
+        ],
+        module: {
+            rules: [
+                {
+                    test: /\.(js|jsx)$/,
+                    use: 'babel-loader',
+                    exclude: /node_modules/,
+                }
+            ]
+        }
     }
 }
