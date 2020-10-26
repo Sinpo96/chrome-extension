@@ -14,6 +14,12 @@ module.exports = env => {
             path: path.resolve(__dirname, 'dist'),
             publicPath: ""
         },
+        resolve: {
+            alias: {
+                '@components': path.resolve(__dirname, './src/components'),
+                '@pages': path.resolve(__dirname, './src/pages')
+            }
+        },
         plugins: [
             new CleanWebpackPlugin(),
             new HtmlWebpackPlugin({
@@ -24,7 +30,7 @@ module.exports = env => {
             }),
             new CopyPlugin({
                 patterns: [
-                    { from: path.resolve(__dirname, './src/extension-config/'), to: path.resolve(__dirname, 'dist') },
+                    { from: path.resolve(__dirname, './extension-config/'), to: path.resolve(__dirname, 'dist') },
                     { from: path.resolve(__dirname, './images/'), to: path.resolve(__dirname, 'dist/images/') },
                 ],
             })

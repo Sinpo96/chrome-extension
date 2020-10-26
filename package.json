@@ -2,7 +2,7 @@
   "name": "chrome-extension",
   "version": "1.0.0",
   "description": "",
-  "main": "src/extension-config/background.js",
+  "main": "extension-config/background.js",
   "scripts": {
     "dev": "webpack --env.mode=development --progress",
     "build": "webpack --env.mode=production --progress"
