@@ -4,15 +4,17 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
 const config = {
-    mode: 'development',
+    mode: 'production',
     entry: {
-        index: [path.resolve(__dirname, './src/index.js'), "webpack-hot-middleware/client?reload=true"]
+        index: path.resolve(__dirname, './src/index.js')
     },
     output: {
         filename: "[name].js",
         path: path.resolve(__dirname, 'dist'),
         publicPath: ""
     },
+    // 这行不加的话使用 dev 打包的代码无法被 chrome 读取
+    devtool: 'cheap-module-source-map',
     resolve: {
         alias: {
             '@components': path.resolve(__dirname, './src/components'),

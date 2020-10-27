@@ -11,12 +11,18 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const config = require('../webpack.config');
 const open = require('open');
-config.plugins.push(new webpack.HotModuleReplacementPlugin());
-const complier = webpack(config);
 const app = express();
 
 // 默认9000端口
 const port = 9000;
+
+// 入口处增加 webpack-hot-middleware/client?reload=true
+for (let i in config.entry) {
+    config.entry[i] = [config.entry[i], 'webpack-hot-middleware/client?reload=true'];
+}
+
+config.plugins.push(new webpack.HotModuleReplacementPlugin());
+const complier = webpack(config);
 
 app.use(webpackDevMiddleware(complier, {
     publicPath: config.output.publicPath,
