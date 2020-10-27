@@ -19,7 +19,8 @@ const app = express();
 const port = 9000;
 
 app.use(webpackDevMiddleware(complier, {
-    publicPath: config.output.publicPath
+    publicPath: config.output.publicPath,
+    writeToDisk: true
 }));
 
 app.use(webpackHotMiddleware(complier, {
