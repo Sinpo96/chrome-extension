@@ -23,12 +23,12 @@ const config = {
     },
     plugins: [
         new CleanWebpackPlugin(),
-        // new HtmlWebpackPlugin({
-        //     filename: "popup.html",
-        //     template: path.resolve(__dirname, './src/index.html'),
-        //     chunks: [ 'index' ],
-        //     excludeChunks: [ 'background.js' ]
-        // }),
+        new HtmlWebpackPlugin({
+            filename: "popup.html",
+            template: path.resolve(__dirname, './src/index.html'),
+            chunks: [ 'index' ],
+            excludeChunks: [ 'background.js' ]
+        }),
         new CopyPlugin({
             patterns: [
                 { from: path.resolve(__dirname, './extension-config/'), to: path.resolve(__dirname, 'dist') },
