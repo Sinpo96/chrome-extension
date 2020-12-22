@@ -1,7 +1,7 @@
 {
-	"name": "Common API shortcuts",
+	"name": "AYWP_FAST_API",
 	"version": "1.0",
-	"description": "常用API的快捷方式",
+	"description": "爱用旺铺快捷api请求",
 	"permissions": [
 		"activeTab",
 		"declarativeContent",
