@@ -7,8 +7,10 @@
 */
 const express = require('express');
 const webpack = require('webpack');
+const path = require('path');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const config = require('../webpack.config');
 const open = require('open');
 const app = express();
@@ -22,6 +24,13 @@ for (let i in config.entry) {
 }
 
 config.plugins.push(new webpack.HotModuleReplacementPlugin());
+console.log(path.resolve(__dirname, './src/index.html'));
+config.plugins.push(new HtmlWebpackPlugin({
+    filename: "popup.html",
+    template: path.resolve(__dirname, './src/index.html'),
+    chunks: [ 'index' ],
+    excludeChunks: [ 'background.js' ]
+}));
 const complier = webpack(config);
 
 app.use(webpackDevMiddleware(complier, {
