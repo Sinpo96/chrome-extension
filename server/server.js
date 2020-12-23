@@ -10,7 +10,9 @@ const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const config = require('../webpack.config');
+const path = require('path');
 const open = require('open');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const app = express();
 
 // 默认9000端口
@@ -23,6 +25,16 @@ for (let i in config.entry) {
 
 config.plugins.push(new webpack.HotModuleReplacementPlugin());
 const complier = webpack(config);
+
+complier.hooks.done.tap('DonePlugin',()=>{
+    console.log('编译完成');
+    complier.apply(new HtmlWebpackPlugin({
+        filename: "popup.html",
+        template: path.resolve(__dirname, '../src/index.html'),
+        chunks: [ 'index' ],
+        excludeChunks: [ 'background.js' ]
+    }));
+})
 
 app.use(webpackDevMiddleware(complier, {
     publicPath: config.output.publicPath,
