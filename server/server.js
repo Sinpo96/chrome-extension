@@ -9,10 +9,10 @@ const express = require('express');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const config = require('../webpack.config');
 const path = require('path');
 const open = require('open');
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const app = express();
 
 // 默认9000端口
