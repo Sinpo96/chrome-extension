@@ -37,12 +37,12 @@ compiler.hooks.done.tap('DonePlugin',()=>{
     }));
 })
 
-app.use(webpackDevMiddleware(complier, {
+app.use(webpackDevMiddleware(compiler, {
     publicPath: config.output.publicPath,
     writeToDisk: true
 }));
 
-app.use(webpackHotMiddleware(complier, {
+app.use(webpackHotMiddleware(compiler, {
     heartbeat: 2000
 }));
 
