@@ -26,6 +26,7 @@ for (let i in config.entry) {
 config.plugins.push(new webpack.HotModuleReplacementPlugin());
 const complier = webpack(config);
 
+// TODO 虽然不合逻辑，但是现在至少能先解决问题
 complier.hooks.done.tap('DonePlugin',()=>{
     console.log('编译完成');
     complier.apply(new HtmlWebpackPlugin({
