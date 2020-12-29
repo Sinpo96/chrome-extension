@@ -26,15 +26,8 @@ for (let i in config.entry) {
 config.plugins.push(new webpack.HotModuleReplacementPlugin());
 const compiler = webpack(config);
 
-// TODO 虽然不合逻辑，但是现在至少能先解决问题
 compiler.hooks.done.tap('DonePlugin',()=>{
     console.log('编译完成');
-    compiler.apply(new HtmlWebpackPlugin({
-        filename: "popup.html",
-        template: path.resolve(__dirname, '../src/index.html'),
-        chunks: [ 'index' ],
-        excludeChunks: [ 'background.js' ]
-    }));
 })
 
 app.use(webpackDevMiddleware(compiler, {

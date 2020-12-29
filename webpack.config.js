@@ -22,7 +22,7 @@ const config = {
         }
     },
     plugins: [
-        new CleanWebpackPlugin(),
+        new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
         new HtmlWebpackPlugin({
             filename: "popup.html",
             template: path.resolve(__dirname, './src/index.html'),
