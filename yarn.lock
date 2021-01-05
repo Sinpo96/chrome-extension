@@ -5402,6 +5402,11 @@ split-string@^3.0.1, split-string@^3.0.2:
   dependencies:
     extend-shallow "^3.0.0"
 
+ssestream@^1.1.0:
+  version "1.1.0"
+  resolved "https://r.cnpmjs.org/ssestream/download/ssestream-1.1.0.tgz#f46d046ede4797ca00e2e1b88964021cfbe7d678"
+  integrity sha1-9G0Ebt5Hl8oA4uG4iWQCHPvn1ng=
+
 ssri@^6.0.1:
   version "6.0.1"
   resolved "https://registry.npm.taobao.org/ssri/download/ssri-6.0.1.tgz#2a3c41b28dd45b62b63676ecb74001265ae9edd8"

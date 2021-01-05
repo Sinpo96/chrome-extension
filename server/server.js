@@ -7,39 +7,30 @@
 */
 const express = require('express');
 const webpack = require('webpack');
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const webpackHotMiddleware = require('webpack-hot-middleware');
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const config = require('../webpack.config');
 const path = require('path');
 const open = require('open');
+const webpackConfig = require('../webpack.config');
+const config = require('./config');
+const setUpMiddleWare = require('../server/middleWare');
 const app = express();
 
 // 默认9000端口
-const port = 9000;
+const port = config.port;
 
-// 入口处增加 webpack-hot-middleware/client?reload=true
-for (let i in config.entry) {
-    config.entry[i] = [config.entry[i], 'webpack-hot-middleware/client?reload=true'];
-}
+(function start() {
+    // 入口处增加 webpack-hot-middleware/client?reload=true
+    for (let i in webpackConfig.entry) {
+        webpackConfig.entry[i] = [webpackConfig.entry[i], 'webpack-hot-middleware/client?reload=true'];
+    }
+    webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
 
-config.plugins.push(new webpack.HotModuleReplacementPlugin());
-const compiler = webpack(config);
+    const compiler = webpack(webpackConfig);
 
-compiler.hooks.done.tap('DonePlugin',()=>{
-    console.log('编译完成');
-})
+    // middleware
+    setUpMiddleWare(app, compiler);
 
-app.use(webpackDevMiddleware(compiler, {
-    publicPath: config.output.publicPath,
-    writeToDisk: true
-}));
-
-app.use(webpackHotMiddleware(compiler, {
-    heartbeat: 2000
-}));
-
-app.listen(port, () => {
-    open(`http://0.0.0.0:${port}/popup.html`);
-    console.log(`浏览器${port}已经启动...`);
-});
+    app.listen(port, () => {
+        open(`http://0.0.0.0:${port}/popup.html`);
+        console.log(`浏览器${port}已经启动...`);
+    });
+})();
