@@ -1,4 +1,4 @@
-const sseStream = require('ssestream');
+const sseStream = require('ssestream').default;
 
 module.exports = function (compiler) {
     return (req, res, next) => {
