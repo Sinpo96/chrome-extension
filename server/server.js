@@ -20,7 +20,8 @@ const port = config.port;
 (function start() {
     // 入口处增加 webpack-hot-middleware/client?reload=true
     for (let i in webpackConfig.entry) {
-        webpackConfig.entry[i] = [webpackConfig.entry[i], 'webpack-hot-middleware/client?reload=true'];
+        // 这里要配置hmr请求的地址，如果不配置，chrome就会向 chrome:extension// 请求内容，报404的错
+        webpackConfig.entry[i] = [`webpack-hot-middleware/client?path=http://${config.host}:${config.port}/__extension_auto_reload__&reload=true`, webpackConfig.entry[i]];
     }
     webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
 
@@ -30,7 +31,7 @@ const port = config.port;
     setUpMiddleWare(app, compiler);
 
     app.listen(port, () => {
-        open(`http://0.0.0.0:${port}/popup.html`);
+        open(`http://${config.host}:${config.port}/popup.html`);
         console.log(`浏览器${port}已经启动...`);
     });
 })();

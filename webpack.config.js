@@ -1,12 +1,13 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
 const config = {
     mode: 'production',
     entry: {
-        index: path.resolve(__dirname, './src/index.js')
+        index: path.resolve(__dirname, './src/index.js'),
+        // background: path.resolve(__dirname, './extension-config/background.js')
     },
     output: {
         filename: "[name].js",
@@ -22,17 +23,17 @@ const config = {
         }
     },
     plugins: [
-        new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
+        new CleanWebpackPlugin({cleanStaleWebpackAssets: false}),
         new HtmlWebpackPlugin({
             filename: "popup.html",
             template: path.resolve(__dirname, './src/index.html'),
-            chunks: [ 'index' ],
-            excludeChunks: [ 'background.js' ]
+            chunks: ['index'],
+            excludeChunks: ['background.js']
         }),
         new CopyPlugin({
             patterns: [
-                { from: path.resolve(__dirname, './extension-config/'), to: path.resolve(__dirname, 'dist') },
-                { from: path.resolve(__dirname, './images/'), to: path.resolve(__dirname, 'dist/images/') },
+                {from: path.resolve(__dirname, './extension-config/'), to: path.resolve(__dirname, 'dist')},
+                {from: path.resolve(__dirname, './images/'), to: path.resolve(__dirname, 'dist/images/')},
             ],
         })
     ],

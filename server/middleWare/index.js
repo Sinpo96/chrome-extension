@@ -13,6 +13,10 @@ module.exports = function (app, compiler) {
 
     app.use(webpackDevMiddleware(compiler, {
         publicPath: webpackConfig.output.publicPath,
+        headers: {
+            // 配置 cors 跨域
+            'Access-Control-Allow-Origin': '*',
+        },
         writeToDisk: true
     }));
 
