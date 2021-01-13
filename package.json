@@ -4,8 +4,8 @@
   "description": "",
   "main": "extension-config/background.js",
   "scripts": {
-    "dev": "webpack-dev-server  --env.mode=development --progress",
-    "build": "webpack --env.mode=production --progress",
+    "dev": "NODE_ENV=development webpack-dev-server --progress",
+    "build": "NODE_ENV=production webpack --progress",
     "server": "node server/server.js"
   },
   "repository": {

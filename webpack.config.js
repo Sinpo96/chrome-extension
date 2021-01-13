@@ -4,9 +4,9 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
 const config = {
-    mode: 'production',
+    mode: process.env.NODE_ENV,
     entry: {
-        index: path.resolve(__dirname, './src/index.js'),
+        index: path.resolve(__dirname, './src/index.js')
         // background: path.resolve(__dirname, './extension-config/background.js')
     },
     output: {
